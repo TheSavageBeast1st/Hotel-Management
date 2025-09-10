@@ -1,0 +1,98 @@
+Create database baratiehotel
+
+use baratiehotel
+
+create table suite_pricing (Suite varchar(20) primary key, Cost_Per_Night decimal(15, 2) not NULL);
+
+insert into suite_pricing values ('Captain', 6800.00);
+
+insert into suite_pricing values ('Vice Admiral', 9000.00);
+
+insert into suite_pricing values ('Fleet Admiral', 13000.00);
+
+
+create table Baratie_Booking (Room_No int primary key, Suite varchar(30), Status varchar(30) not null, Booking_Name varchar(30) not null, Booking_Email varchar(50) not null, No_Of_Days int default NULL);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (101, 'Captain', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(102, 'Captain', 'BOOKED', 'Dhullipala', 'dhullipala2007@gmail.com', 1 );
+
+insert into Baratie_Booking values(103, 'Captain', 'BOOKED', 'Amudhan', 'amudhan2008@gmail.com', 2);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (104, 'Captain', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (105, 'Captain', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(106, 'Captain', 'BOOKED', 'Satheesh', 'satheesh2000@hotmail.com', 1);
+
+insert into Baratie_Booking values(107, 'Captain', 'BOOKED', 'Pranav', 'pranav9090@yahoo.com', 1);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (108, 'Captain', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(109, 'Captain', 'BOOKED', 'Madhukanthan', 'madhukanthan@hotmail.com', 1);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (110, 'Captain', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+     VALUES (111, 'Captain', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (112, 'Captain', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (113, 'Vice Admiral', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(114, 'Vice Admiral', 'BOOKED', 'Karthik', 'karthiken1980@gmail.com', 2);
+
+insert into Baratie_Booking values(115, 'Vice Admiral', 'BOOKED', 'Narayan', 'trnarayansri@gmail.com', 2);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (116, 'Vice Admiral', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+     VALUES (117, 'Vice Admiral', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(118, 'Vice Admiral', 'BOOKED', 'Krithikan', 'krithidhatake@yahoo.com', 2);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+     VALUES (119, 'Vice Admiral', 'VACANT', '-', '-');
+    
+insert into Baratie_Booking values(120, 'Vice Admiral', 'BOOKED', 'Rakesh', 'rakhibhai@gmail.com', 2);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+     VALUES (121, 'Fleet Admiral', 'VACANT', '-', '-');
+
+insert into Baratie_Booking values(122, 'Fleet Admiral', 'BOOKED', 'Ponnusamy', 'yuudiout@gmail.com', 1);
+
+insert into Baratie_Booking values(123, 'Fleet Admiral', 'BOOKED', 'Nithilesh', 'icleannithi@gmail.com', 1);
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (124, 'Fleet Admiral', 'VACANT', '-', '-');
+
+INSERT INTO Baratie_Booking (Room_No, Suite, Status, Booking_Name, Booking_Email)
+    VALUES (125, 'Fleet Admiral', 'VACANT', '-', '-');
+
+create table cost (S_No int auto_increment primary key, Room_No int, Suite varchar(30) Not NULL, No_Of_Days int , Total_Cost decimal(15,2), foreign key (Room_No) references Baratie_Booking(Room_No) on update cascade, foreign key (Suite) references suite_pricing(Suite) on update cascade);
+
+insert into cost (Room_No, Suite, No_Of_Days, Total_Cost)
+select
+    b.Room_No,
+    b.Suite,
+    b.No_Of_Days,
+    sp.Cost_Per_Night * b.No_Of_Days AS Total_Cost
+from 
+    Baratie_Booking b
+join 
+    suite_pricing sp ON b.Suite = sp.Suite;
+
+
+
+
+
+
+
